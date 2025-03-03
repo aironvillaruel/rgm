@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <script src="https://kit.fontawesome.com/344d28dac7.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+    <title>Home - RGM</title>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .bg-image {
+            background-size: cover;
+            background-position: center;
+            background-image: url('images/bg.jpg');
+        }
+
+        .about {
+            background-image: url('images/about.jpg');
+        }
+
+        .content {
+            margin: 100px;
+            height: 2000px;
+        }
+
+        .box {
+            text-align: center;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+
+        .box.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* width */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        /* Track */
+        ::-webkit-scrollbar-track {
+            box-shadow: inset 0 0 5px grey;
+            border-radius: 10px;
+        }
+
+        /* Handle */
+        ::-webkit-scrollbar-thumb {
+            background: rgb(109, 109, 109);
+            border-radius: 10px;
+        }
+
+        #navbar {
+            transition: top 0.3s ease;
+            /* This will smoothly hide/show the navbar */
+        }
+
+        .mobile-warning {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 18px;
+            z-index: 1000;
+        }
+
+        /* Media query for mobile devices */
+        @media (max-width: 768px) {
+            .mobile-warning {
+                display: block;
+            }
+        }
+    </style>
+</head>
+
+<body class="flex flex-col">
+    <div class="mobile-warning">
+        This website is only viewable on desktop. Please switch to a desktop device for the best experience.
+    </div>
+    <div id="app" class="md:block hidden">
+        <div>
+            <nav id="navbar"
+                class="bg-clip-padding backdrop-filter backdrop-blur-sm p-5 fixed top-0 w-full z-20 shadow-xl border border-zinc-950">
+                <div class="container mx-auto">
+                    <div class="flex justify-between items-center">
+                        <div class="text-white font-bold text-lg"> <a href="index.html"
+                                class="flex flex-row justify-center items-center gap-3">
+                                <img src="images/logo.png" alt="RGM Rubber Products"
+                                    style="filter: drop-shadow(0 0 1px white);" class="w-16" />Rubber Products
+                                Manufacturing
+                            </a></div>
+                        <div>
+                            <a href="#" onclick="homePage()" id="home_page"
+                                class="text-white mx-2 hover:text-gray-300 nav-link text-lg p-2 border-b-2 border-white">Home</a>
+                            <a href="#" onclick="productPage()" id="product_page"
+                                class="text-white mx-2 hover:text-gray-300 nav-link text-lg p-2">Products</a>
+                            <a href="#" onclick="aboutPage()" id="about_page"
+                                class="text-white mx-2 hover:text-gray-300 nav-link text-lg p-2">About</a>
+                            <a href="#" onclick="contactPage()" id="contact_page"
+                                class="text-white mx-2 hover:text-gray-300 nav-link text-lg p-2">Contact</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <main class="" id="main-content">
+
+            <div class="hidden slide-top z-50 fixed h-3/4 bg-white shadow-md rounded-lg flex flex-col items-center justify-center bottom-5 w-1/4 right-5"
+                id="contactDiv">
+                <div class="bg-red-900 p-4 w-full text-white flex justify-between">
+                    <label class="text-lg font-semibold">Rubber Products Manufacturing</label>
+                    <span id="closeForm" onclick="closeForm()"><i
+                            class="fa-solid fa-circle-xmark text-xl cursor-pointer hover:scale-105 transition-transform duration-200 "></i></span>
+                </div>
+                <iframe
+                    src="https://docs.google.com/forms/d/e/1FAIpQLScum9uR82z4_CCL86PAajgwSoQ4KJVCaFxBm9bkOV1pNKa77A/viewform?embedded=true"
+                    width="100%" height="100%" frameborder="0" style="border: none;" marginheight="0" marginwidth="0">
+                    Loading…
+                </iframe>
+            </div>
+
+            <button onclick="openForm()" id="btnForm"
+                class=" p-4 text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-2 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 me-2 z-30 fixed bottom-5 w-40 right-5 flex items-center justify-center gap-2"><i
+                    class="fa-regular fa-envelope text-xl"></i> Forms</button>
+
+            <section id="section1" class="bg-image h-screen flex items-center justify-center relative">
+                <div class="absolute inset-0 bg-zinc-900 opacity-70"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-80"></div>
+                <div class="flex z-10 flex-col justify-center animate-fade-in-up">
+                    <h1 class="relative text-white text-5xl font-semibold bungee-regular">RGM Rubber Products
+                        Manufacturing</h1>
+                    <h2 class="text-white text-2xl font-semibold mt-5 typewriter">"Rubber Excellence, Tailored for You."
+                    </h2>
+                    <div class="flex flex-row gap-10 p-2 mt-5">
+                        <a href="#client"
+                            class="text-white p-3 bg-gradient-to-r from-red-500 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-2 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg px-5 w-40 hover:bg-red-600 text-center">Get
+                            Started</a>
+                        <button
+                            class="text-white p-3 bg-gradient-to-r from-zinc-700 via-zinc-800 to-zinc-900 hover:bg-gradient-to-br focus:ring-2 focus:outline-none focus:ring-zinc-300 dark:focus:ring-zinc-800 shadow-lg shadow-zinc-900/50 dark:shadow-lg dark:shadow-zinc-800/80 font-medium rounded-lg px-5 w-40 hover:bg-zinc-600 text-center">Learn
+                            More</button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="facts" class=" flex items-center justify-center relative bg-zinc-900 p-10">
+                <div class="flex z-10 flex-col justify-center w-full items-center">
+                    <div class="flex justify-center gap-5">
+                        <div class="p-4 shadow-md w-1/2 flex flex-col items-center gap-4 box">
+                            <h1 class="relative text-white text-2xl font-semibold mb-5 text-center">Welcome to RGM</h1>
+                            <label class="text-white mt-5 text-justify text-xl">A trailblazer in the realm
+                                of industrial rubber production. With a steadfast commitment to excellence and
+                                innovation, we have
+                                established ourselves as a
+                                premier
+                                manufacturer, dedicated to delivering top-notch rubber solutions to meet the evolving
+                                needs of
+                                industries
+                                worldwide.</label>
+
+                            <label class="text-white mt-5 text-justify text-xl">Our journey is marked by a relentless
+                                pursuit of
+                                quality, precision engineering, and customer satisfaction, making us the preferred
+                                choice for
+                                discerning clients seeking unparalleled expertise and reliability in industrial rubber
+                                manufacturing</label>
+                            <button
+                                class="text-white p-2 bg-red-500 rounded-md shadow-md hover:bg-red-600 cursor-pointer">Click
+                                Here</button>
+                        </div>
+                        <div class="p-4 shadow-md w-1/2 flex flex-col items-center gap-4 box">
+                            <h1 class="relative text-white text-2xl font-semibold mb-5 text-center">Hi there!</h1>
+                            <label class="text-white mt-5 text-lg text-justify">Here in RGM, we are dedicated to
+                                providing
+                                exceptional technical expertise in our industry, ensuring our customers receive
+                                attentive service
+                                from their quote requests to the delivery of their products. Our goal is to be your
+                                assistant go-to
+                                rubber supplier, offering not only top-quality but also reasonably priced rubber
+                                products.</label>
+                            <label class="text-white mt-5 text-justify text-lg">RGM takes pride in continuing this
+                                legacy by
+                                offering superior custom-made rubber products and maintaining strong business
+                                relationships with our
+                                corporate and industrial clients. Our team is committed to providing excellent service
+                                and being an
+                                essential part of our customers' processes</label>
+                            <button
+                                class="text-white p-2 bg-red-500 rounded-md shadow-md hover:bg-red-600 cursor-pointer">Click
+                                Here</button>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <section id="featured" class="h-screen flex items-center justify-center relative">
+                <div class="flex z-10 flex-col justify-center w-full items-center">
+                    <h1 class="text-5xl text-zinc-800 font-semibold bungee-regular my-5">Featured Products</h1>
+                    <div class="relative w-full overflow-hidden">
+                        <!-- Carousel Container -->
+                        <div id="carousel" class="flex gap-5 overflow-x-hidden scroll-smooth no-scrollbar p-5 ">
+                            <!-- Card 1 -->
+                            <div
+                                class="flex-shrink-0 flex flex-col bg-white p-2 w-1/4 rounded-xl shadow-xl  hover:scale-105 transition-transform duration-200 cursor-pointer">
+                                <img src="images/ebp.png" class="rounded-xl" alt="Card Image">
+                            </div>
+                            <!-- Card 3 -->
+                            <div
+                                class="flex-shrink-0 flex flex-col bg-white p-2 w-1/4 rounded-xl shadow-xl  hover:scale-105 transition-transform duration-200 cursor-pointer">
+                                <img src="images/rs.png" class="rounded-xl" alt="Card Image">
+                            </div>
+                            <!-- Card 4 -->
+                            <div
+                                class="flex-shrink-0 flex flex-col bg-white p-2 w-1/4 rounded-xl shadow-xl  hover:scale-105 transition-transform duration-200 cursor-pointer">
+                                <img src="images/ftmej.png" class="rounded-xl" alt="Card Image">
+                            </div>
+                            <!-- Card 5 -->
+                            <div
+                                class="flex-shrink-0 flex flex-col bg-white p-2 w-1/4 rounded-xl shadow-xl  hover:scale-105 transition-transform duration-200 cursor-pointer">
+                                <img src="images/rfcp.png" class="rounded-xl" alt="Card Image">
+                            </div>
+                            <!-- Card 6 -->
+                            <div
+                                class="flex-shrink-0 flex flex-col bg-white p-2 w-1/4 rounded-xl shadow-xl  hover:scale-105 transition-transform duration-200 cursor-pointer">
+                                <img src="images/rfcp.png" class="rounded-xl" alt="Card Image">
+                            </div>
+                            <div
+                                class="flex-shrink-0 flex flex-col bg-white p-2 w-1/4 rounded-xl shadow-xl  hover:scale-105 transition-transform duration-200 cursor-pointer">
+                                <img src="images/ftmej.png" class="rounded-xl" alt="Card Image">
+                            </div>
+                        </div>
+
+                        <!-- Navigation Buttons -->
+                        <button
+                            class="absolute top-1/2 left-0 bg-zinc-800 opacity-75 transform -translate-y-1/2 text-white rounded-full p-3 focus:outline-none"
+                            onclick="scrollCarousel(-1)">
+                            <i class="fa-solid fa-angles-left"></i>
+                        </button>
+                        <button
+                            class="absolute top-1/2 right-0 bg-zinc-800 opacity-75 transform -translate-y-1/2 text-white rounded-full p-3 focus:outline-none"
+                            onclick="scrollCarousel(1)">
+                            <i class="fa-solid fa-angles-right"></i>
+                        </button>
+                    </div>
+
+                </div>
+            </section>
+
+            <section id="us"
+                class=" about relative h-screen flex items-center bg-cover bg-center bg-no-repeat bg-black/100"
+                onclick="autoUse()">
+
+                <div class="absolute inset-0 bg-gradient-to-tr from-black/100 to-transparent"></div>
+
+
+                <div class="relative z-10 flex flex-col w-full h-3/4">
+                    <div class="flex justify-between box">
+                        <div class="flex-col flex justify-center items-center w-1/3 p-4 ml-10">
+                            <h1 class="text-white text-5xl font-semibold bungee-regular mb-5 w-full">Why Choose Us?</h1>
+                            <p class="text-white text-lg font-semibold text-justify">At RGM, we believe in delivering
+                                exceptional quality, and
+                                personalized service that sets us apart from the competition.</p>
+                        </div>
+                        <div class="flex flex-col justify-center items-center w-1/2 p-10">
+                            <div class="flex flex-row gap-4 mb-4">
+                                <div
+                                    class="w-1/2 h-full rounded-xl shadow-xl hover:scale-105 transition-transform duration-200 border-2 border-white bg-clip-padding backdrop-filter backdrop-blur-sm">
+                                    <div class="flex flex-col items-center p-4 h-full m-2">
+                                        <i class="fa-solid fa-hand-holding-dollar text-7xl text-red-500"></i>
+                                        <div class="mt-5 w-full">
+                                            <p class="text-center text-md text-white">"Our streamlined processes and
+                                                scalable
+                                                production
+                                                capabilities
+                                                enable us to offer premium-quality rubber products at competitive
+                                                prices."</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div
+                                    class="w-1/2 h-full rounded-xl shadow-xl hover:scale-105 transition-transform duration-200 border-2 border-white bg-clip-padding backdrop-filter backdrop-blur-sm">
+                                    <div class="flex flex-col items-center p-4 h-full m-2">
+                                        <i class="fa-brands fa-pagelines text-7xl text-red-500"></i>
+                                        <div class="mt-5 w-full">
+                                            <p class="text-center text-md text-white">"We are committed to reducing our
+                                                environmental
+                                                footprint by implementing sustainable production methods, and
+                                                minimizing waste."</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="flex flex-row gap-4 ">
+                                <div
+                                    class="w-1/2 h-full rounded-xl shadow-xl hover:scale-105 transition-transform duration-200 border-2 border-white bg-clip-padding backdrop-filter backdrop-blur-sm">
+                                    <div class="flex flex-col items-center p-4 h-full m-2">
+                                        <i class="fa-solid fa-face-smile text-7xl text-red-500"></i>
+                                        <div class="mt-5 w-full">
+                                            <p class="text-center text-md text-white">"Our team of experts is here to
+                                                support you
+                                                every
+                                                step
+                                                of the
+                                                way, from initial consultation to post-delivery assistance, ensuring a
+                                                seamless
+                                                experience."
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div
+                                    class="w-1/2 h-full rounded-xl shadow-xl hover:scale-105 transition-transform duration-200 border-2 border-white bg-clip-padding backdrop-filter backdrop-blur-sm">
+                                    <div class="flex flex-col items-center p-4 h-full m-2">
+                                        <i class="fa-solid fa-people-roof text-7xl text-red-500"></i>
+                                        <div class="mt-5 w-full">
+                                            <p class="text-center text-md text-white">"From design consultation to
+                                                post-sales
+                                                assistance,
+                                                our team of rubber experts ensures you get tailor-made solutions for
+                                                your specific
+                                                industry
+                                                requirements."
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+            </section>
+
+
+            <section class="">
+                <div class="flex justify-between h-3/4">
+                    <div class="w-3/4 p-4">
+                        <div class=" flex flex-col w-1/2 m-auto p-2">
+                            <h1 class="text-3xl font-semibold bungee-regular mb-2">Get in <span
+                                    class="text-red-800">Touch</span>
+                            </h1>
+                            <label class="text-md font-semibold mb-2">We're here to help! Reach out for inquiries,
+                                support, or
+                                collaborations.</label>
+                            <div class="relative mb-6 mt-5">
+                                <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                                    <i class="fa-solid fa-user text-gray-500"></i>
+                                </div>
+                                <input type="text" id="input-group-1"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder="Name">
+                            </div>
+                            <div class="relative mb-6">
+                                <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 16">
+                                        <path
+                                            d="m10.036 8.278 9.258-7.79A1.979 1.979 0 0 0 18 0H2A1.987 1.987 0 0 0 .641.541l9.395 7.737Z" />
+                                        <path
+                                            d="M11.241 9.817c-.36.275-.801.425-1.255.427-.428 0-.845-.138-1.187-.395L0 2.6V14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2.5l-8.759 7.317Z" />
+                                    </svg>
+                                </div>
+                                <input type="text" id="input-group-1"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder="Email">
+                            </div>
+                            <div class="relative mb-6">
+                                <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                                    <i class="fa-solid fa-message text-gray-500"></i>
+                                </div>
+                                <input type="text" id="input-group-1"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder="Subject">
+                            </div>
+                            <label for="input-group-1"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Message</label>
+                            <textarea name="" id=""
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 mb-5"></textarea>
+
+                            <button id="btnForm"
+                                class=" p-4 text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-2 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 me-2 z-30  flex items-center justify-center gap-2">Submit</button>
+                            <div class="flex justify-between mt-5">
+                                <div class="flex justify-between items-center p-2">
+                                    <i class="fa-solid fa-phone text-2xl"></i>
+                                    <div class="flex flex-col ml-2">
+                                        <h1 class="font-semibold text-md">PHONE</h1>
+                                        <p class="text-sm text-red-500">09495241546</p>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between items-center p-2">
+                                    <i class="fa-brands fa-viber text-2xl"></i>
+                                    <div class="flex flex-col ml-2">
+                                        <h1 class="font-semibold text-md">VIBER</h1>
+                                        <p class="text-sm text-red-500">09495241546</p>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between items-center p-2">
+                                    <i class="fa-solid fa-envelope text-2xl"></i>
+                                    <div class="flex flex-col ml-2">
+                                        <h1 class="font-semibold text-md">EMAIL</h1>
+                                        <p class="text-sm text-red-500">joeymer.capacio30@gmail.com</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-zinc-900 w-1/3">
+                    </div>
+                    <div class="absolute right-72 w-1/4 mt-4">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3863.673071505173!2d120.9874268751033!3d14.445994986022258!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397cd129e45ea0d%3A0x7b3072895c384d0!2sRGM%20rubber%20products%20manufacturing!5e0!3m2!1sen!2sph!4v1738848519962!5m2!1sen!2sph"
+                            width="100%" height="550" style="border:0;" allowfullscreen="" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade" class="shadow-xl p-2 rounded-sm"></iframe>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <div>
+            <footer class="bg-zinc-800 text-white p-4">
+                <div class="container mx-auto text-center">
+                    <p>&copy; {{ date('Y') }} RGM Rubber Products Manufacturing. All rights reserved.</p>
+                    <div class="flex justify-center space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white">Privacy Policy</a>
+                        <a href="#" class="text-gray-400 hover:text-white">Terms of Service</a>
+                    </div>
+                </div>
+            </footer>
+
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+
+</html>

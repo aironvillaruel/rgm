@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <script src="https://kit.fontawesome.com/344d28dac7.js" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product - RGM</title>
+</head>
+
+<body class="flex flex-col">
+    <div id="app">
+        <div>
+            <nav id="navbar"
+                class="bg-clip-padding backdrop-filter backdrop-blur-sm p-5 fixed top-0 w-full z-20 shadow-xl border border-zinc-950">
+                <div class="container mx-auto">
+                    <div class="flex justify-between items-center">
+                        <div class="text-white font-bold text-lg"> <a href="{{ url('/home') }}"
+                                class="flex flex-row justify-center items-center gap-3">
+                                <img src="images/logo.png" alt="RGM Rubber Products"
+                                    style="filter: drop-shadow(0 0 1px white);" class="w-16" />Rubber Products
+                                Manufacturing
+                            </a></div>
+                        <div>
+                            <a href="index.html" onclick="homePage()" id="home_page"
+                                class="text-white mx-2 hover:text-gray-300 nav-link text-lg p-2 border-b-2 border-white">Home</a>
+                            <a href="product.html" onclick="productPage()" id="product_page"
+                                class="text-white mx-2 hover:text-gray-300 nav-link text-lg p-2">Products</a>
+                            <a href="{{ url('/about') }}" onclick="aboutPage()" id="about_page"
+                                class="text-white mx-2 hover:text-gray-300 nav-link text-lg p-2">About</a>
+                            <a href="{{ url('/contact') }}" onclick="contactPage()" id="contact_page"
+                                class="text-white mx-2 hover:text-gray-300 nav-link text-lg p-2">Contact</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <main class="">
+            <section id="section2" class="h-screen flex items-center justify-center bg">
+                <div class="flex flex-col w-full items-center">
+                    <h1 class="text-white text-5xl">Products</h1>
+                    <div class="flex flex-row w-full mt-10 ">
+                        <div class="flex flex-col bg-white p-2 w-1/4 shadow-xl">
+                            <img src="images/ebp.png" class="rounded-xl">
+                        </div>
+                        <div class="flex flex-col bg-white p-2 w-3/4 shadow-xl">
+                            1
+                        </div>
+                    </div>
+
+                </div>
+
+            </section>
+            <section id="client" class="h-screen flex items-center justify-center relative bg-zinc-950">
+                <div class="flex z-10 flex-col justify-center">
+                    <h1 class="relative text-white text-5xl font-semibold bungee-regular">Clients</h1>
+                </div>
+            </section>
+
+        </main>
+        <div>
+            <footer class="bg-zinc-800 text-white p-4">
+                <div class="container mx-auto text-center">
+                    <p>&copy; {{ date('Y') }} RGM Rubber Products Manufacturing. All rights reserved.</p>
+                    <div class="flex justify-center space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white">Privacy Policy</a>
+                        <a href="#" class="text-gray-400 hover:text-white">Terms of Service</a>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+
+</html>
